@@ -1,0 +1,32 @@
+class Solution {
+    public static int prod(int a,int b,int[] nums){
+        int res=1;
+        for(int i=a;i<=b;i++) res*=nums[i];
+        return res;
+    }
+    public int[] productExceptSelf(int[] nums) {
+        int n=nums.length;
+        int[] sol= new int[n];
+        int[] ans= new int[n];
+        int c=0;
+        for(int i=0;i<n;i++){
+            if(i==0) ans[i]=nums[i];
+            else ans[i]=ans[i-1]*nums[i];
+            if(nums[i]==0) c++;
+        }
+        if(c>1) return sol;
+        if(c==1){
+           for(int i=0;i<n;i++){
+               if(nums[i]==0 ){
+                   if(i!=0) sol[i]=prod(i+1,n-1,nums)*prod(0,i-1,nums);
+                   else sol[i]=prod(i+1,n-1,nums);
+               }
+           } 
+        }
+        else{for(int i=0;i<n;i++){
+            if(i==0) sol[i]=ans[n-1]/ans[i];
+            else sol[i]=ans[i-1]*(ans[n-1]/ans[i]);
+        }}
+        return sol;
+    }
+}
